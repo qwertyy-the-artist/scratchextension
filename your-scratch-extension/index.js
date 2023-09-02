@@ -14,34 +14,34 @@ class Scratch3YourExtension {
     getInfo () {
         return {
             // unique ID for your extension
-            id: 'yourScratchExtension',
+            id: 'javascript1234567890987654321',
 
             // name that will be displayed in the Scratch UI
-            name: 'Demo',
+            name: 'javascript',
 
             // colours to use for your extension blocks
-            color1: '#000099',
-            color2: '#660066',
+            color1: '#ffd83a',
+            color2: '#ccac2e',
 
             // icons to display
-            blockIconURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAAAAACyOJm3AAAAFklEQVQYV2P4DwMMEMgAI/+DEUIMBgAEWB7i7uidhAAAAABJRU5ErkJggg==',
-            menuIconURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAAAAACyOJm3AAAAFklEQVQYV2P4DwMMEMgAI/+DEUIMBgAEWB7i7uidhAAAAABJRU5ErkJggg==',
+            // blockIconURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAAAAACyOJm3AAAAFklEQVQYV2P4DwMMEMgAI/+DEUIMBgAEWB7i7uidhAAAAABJRU5ErkJggg==',
+            // menuIconURI: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAFCAAAAACyOJm3AAAAFklEQVQYV2P4DwMMEMgAI/+DEUIMBgAEWB7i7uidhAAAAABJRU5ErkJggg==',
 
             // your Scratch blocks
             blocks: [
                 {
                     // name of the function where your block code lives
-                    opcode: 'myFirstBlock',
+                    opcode: 'javascriptblock',
 
                     // type of block - choose from:
                     //   BlockType.REPORTER - returns a value, like "direction"
                     //   BlockType.BOOLEAN - same as REPORTER but returns a true/false value
                     //   BlockType.COMMAND - a normal command block, like "move {} steps"
                     //   BlockType.HAT - starts a stack if its value changes from false to true ("edge triggered")
-                    blockType: BlockType.REPORTER,
+                    blockType: BlockType.COMMAND,
 
                     // label to display on the block
-                    text: 'My first block [MY_NUMBER] and [MY_STRING]',
+                    text: 'run javascript code [JSSTRING]',
 
                     // true if this block should end a stack
                     terminal: false,
@@ -54,22 +54,9 @@ class Scratch3YourExtension {
 
                     // arguments used in the block
                     arguments: {
-                        MY_NUMBER: {
+                        JSSTRING: {
                             // default value before the user sets something
-                            defaultValue: 123,
-
-                            // type/shape of the parameter - choose from:
-                            //     ArgumentType.ANGLE - numeric value with an angle picker
-                            //     ArgumentType.BOOLEAN - true/false value
-                            //     ArgumentType.COLOR - numeric value with a colour picker
-                            //     ArgumentType.NUMBER - numeric value
-                            //     ArgumentType.STRING - text value
-                            //     ArgumentType.NOTE - midi music value with a piano picker
-                            type: ArgumentType.NUMBER
-                        },
-                        MY_STRING: {
-                            // default value before the user sets something
-                            defaultValue: 'hello',
+                            defaultValue: 'alert("hello world")',
 
                             // type/shape of the parameter - choose from:
                             //     ArgumentType.ANGLE - numeric value with an angle picker
@@ -91,9 +78,24 @@ class Scratch3YourExtension {
      * implementation of the block with the opcode that matches this name
      *  this will be called when the block is used
      */
-    myFirstBlock ({ MY_NUMBER, MY_STRING }) {
+    alertblock ({ALERTSTRING}) {
         // example implementation to return a string
-        return MY_STRING + ' : doubled would be ' + (MY_NUMBER * 2);
+        alert(ALERTSTRING)
+    }
+    confirmblock ({CONFIRMSTRING}) {
+        return confirm(CONFIRMSTRING)
+    }
+    promptblock ({PROMPTSTRING}) {
+        return prompt(PROMPTSTRING)
+    }
+    urlblock () {
+        return document.URL
+    }
+    projecttitleblock ({PROJECTTITLESTRING}) {
+        document.getElementsByClassName("project-title").item(0).innerHTML = PROJECTTITLESTRING
+    }
+    javascriptblock ({JSSTRING}) {
+        eval(JSSTRING)
     }
 }
 
